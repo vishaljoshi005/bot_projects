@@ -12,8 +12,11 @@ const question = {
 
 class PromptBot extends ActivityHandler {
 
-    constructor(conversationState, userState) {
+    constructor(conversationState, userState, conversationReference) {
         super();
+
+        this.conversationReference = conversationReference;
+
         this.userProfile = userState.createProperty(user);
         this.conversationQuestion =conversationState.createProperty(conversation);
 
@@ -86,8 +89,9 @@ class PromptBot extends ActivityHandler {
         });
 
         this.onConversationUpdate(async (context, next) => {
-            console.log('Check');
-            console.log(TurnContext.getConversationReference(context.activity));
+            const ref = TurnContext.getConversationReference(context.activity);
+            // this.conversationReference[ref.conversation.id] = ref;
+            this.conversationReference.push(ref);
             await next();
         });
 
