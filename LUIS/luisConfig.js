@@ -2,6 +2,8 @@ const {LuisRecognizer} = require('botbuilder-ai');
 
 class LuisConfig {
     constructor(config) {
+        console.log('Config');
+        console.log(config);
         this.recognizer = new LuisRecognizer(config, {}, true);
     }
 

@@ -31,7 +31,7 @@ const adapter = new BotFrameworkAdapter({
 adapter.onTurnError = async (context, error) => {
     console.error(error);
 
-    context.sendActivity('Something went wrong brother');
+    await context.sendActivity('Something went wrong brother');
 };
 
 // Initialize bot handler

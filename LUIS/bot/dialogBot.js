@@ -67,12 +67,15 @@ class DialogBot extends ComponentDialog {
     async secondStep (stepContext) {
         // const details ={} ;
         const luisResult = await this.luis.executeLuisQuery(stepContext.context);
+        console.log(luisResult);
         switch(LuisRecognizer.topIntent(luisResult)) {
             case 'BookFlight':
                 stepContext.values.from = this.luis.getFromEntities(luisResult).airport;
                 stepContext.values.to = this.luis.getToEntities(luisResult).airport;
                 stepContext.values.date = this.luis.getTravelDate(luisResult);
                 break;
+            case 'GetWeather' :
+                // stepContext.values.weather = this.luis.getFromEntities(luisResult);
         }
         return await stepContext.next();
     }
